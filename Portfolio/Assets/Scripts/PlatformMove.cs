@@ -31,7 +31,7 @@ public class PlatformMove : MonoBehaviour
             {
                 foreach(Material mat in mesh.materials)
                 {
-                    mat.DOFade(1, 3);
+                    mat.DOFade(1, 1);
                 }
             }
         }
@@ -48,9 +48,9 @@ public class PlatformMove : MonoBehaviour
     {
         if(distFromPlayer <= tweenTriggerDist)
         {
-            if(!DOTween.IsTweening(this.transform) && this.transform.position.y != -101)
+            if(!DOTween.IsTweening(this.transform) && this.transform.position.y != -100)
             {
-                this.transform.DOMoveY(-101, tweenDuration).SetEase(easeType);
+                this.transform.DOMoveY(-100, tweenDuration).SetEase(easeType);
                 meshes = this.GetComponentsInChildren<MeshRenderer>();
                 Debug.Log(meshes.Length);
                 foreach(MeshRenderer mesh in meshes)

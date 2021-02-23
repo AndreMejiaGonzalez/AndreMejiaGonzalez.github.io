@@ -242,7 +242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPos: {fileID: 0}
   center: {fileID: 513070855646953719}
-  tweenDuration: 0.6
+  tweenDuration: 0.4
   easeType: 24
   tweenTriggerDist: 330
   isFirst: 0

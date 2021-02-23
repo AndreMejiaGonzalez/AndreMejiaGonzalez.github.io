@@ -61,6 +61,19 @@ public class PlatformMove : MonoBehaviour
                     }
                 }
             }
+        } else {
+            if(!DOTween.IsTweening(this.transform) && this.transform.position.y != 1000)
+            {
+                meshes = this.GetComponentsInChildren<MeshRenderer>();
+                foreach(MeshRenderer mesh in meshes)
+                {
+                    foreach(Material mat in mesh.materials)
+                    {
+                        mat.DOFade(0, tweenDuration * 2);
+                    }
+                }
+                this.transform.DOMoveY(300, tweenDuration).SetEase(easeType);
+            }
         }
     }
 }

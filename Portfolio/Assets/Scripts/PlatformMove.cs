@@ -26,14 +26,7 @@ public class PlatformMove : MonoBehaviour
     {
         if(isFirst)
         {
-            meshes = this.GetComponentsInChildren<MeshRenderer>();
-            foreach(MeshRenderer mesh in meshes)
-            {
-                foreach(Material mat in mesh.materials)
-                {
-                    mat.DOFade(1, 1);
-                }
-            }
+            doFadeOnAllMats(1);
         }
     }
 
@@ -51,28 +44,25 @@ public class PlatformMove : MonoBehaviour
             if(!DOTween.IsTweening(this.transform) && this.transform.position.y != -100)
             {
                 this.transform.DOMoveY(-100, tweenDuration).SetEase(easeType);
-                meshes = this.GetComponentsInChildren<MeshRenderer>();
-                Debug.Log(meshes.Length);
-                foreach(MeshRenderer mesh in meshes)
-                {
-                    foreach(Material mat in mesh.materials)
-                    {
-                        mat.DOFade(1, tweenDuration * 2);
-                    }
-                }
+                doFadeOnAllMats(1);
             }
         } else {
-            if(!DOTween.IsTweening(this.transform) && this.transform.position.y != 1000)
+            if(!DOTween.IsTweening(this.transform) && this.transform.position.y != -300)
             {
-                meshes = this.GetComponentsInChildren<MeshRenderer>();
-                foreach(MeshRenderer mesh in meshes)
-                {
-                    foreach(Material mat in mesh.materials)
-                    {
-                        mat.DOFade(0, tweenDuration * 2);
-                    }
-                }
-                this.transform.DOMoveY(300, tweenDuration).SetEase(easeType);
+                doFadeOnAllMats(0);
+                this.transform.DOMoveY(-300, tweenDuration).SetEase(easeType);
+            }
+        }
+    }
+
+    void doFadeOnAllMats(float end)
+    {
+        meshes = this.GetComponentsInChildren<MeshRenderer>();
+        foreach(MeshRenderer mesh in meshes)
+        {
+            foreach (Material mat in mesh.materials)
+            {
+                mat.DOFade(end, tweenDuration * 2);
             }
         }
     }

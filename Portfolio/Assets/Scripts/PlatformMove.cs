@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using DG.Tweening;
 
 public class PlatformMove : MonoBehaviour
@@ -60,9 +61,15 @@ public class PlatformMove : MonoBehaviour
         meshes = this.GetComponentsInChildren<MeshRenderer>();
         foreach(MeshRenderer mesh in meshes)
         {
-            foreach (Material mat in mesh.materials)
+            if(mesh.gameObject.GetComponent<TextMeshPro>() == null)
             {
-                mat.DOFade(end, tweenDuration * 2);
+                foreach (Material mat in mesh.materials)
+                {
+                    mat.DOFade(end, tweenDuration * 2);
+                }
+            } else {
+                TextMeshPro _3DText = mesh.gameObject.GetComponent<TextMeshPro>();
+                _3DText.DOFade(end, tweenDuration * 2);
             }
         }
     }

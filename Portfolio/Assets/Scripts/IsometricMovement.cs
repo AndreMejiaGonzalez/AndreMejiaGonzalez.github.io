@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class IsometricMovement : MonoBehaviour
 {
-    
+    [SerializeField]
+    private Transform model;
+
     [SerializeField]
     private float moveSpeed;
     [SerializeField]
@@ -37,7 +39,7 @@ public class IsometricMovement : MonoBehaviour
                 rotateTimer = 0;
             }
         } else {
-            rb.velocity = Vector3.zero;
+            rb.velocity = new Vector3(0, rb.velocity.y, 0);
             rotateTimer = rotateRate;
         }
 
@@ -92,6 +94,7 @@ public class IsometricMovement : MonoBehaviour
 
     void rollForward()
     {
-        transform.Rotate(new Vector3(90,0,0), Space.Self);
+        model.Rotate(new Vector3(-90,0,0), Space.Self);
+        model.localPosition = (model.localRotation.eulerAngles.x == 90) ? new Vector3(model.localPosition.x, 2, model.localPosition.z) : Vector3.zero;
     }
 }
